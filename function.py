@@ -1,6 +1,7 @@
 import unittest
 import requests
 from bs4 import BeautifulSoup
+import youtube_dl
 
 #Enter a Search Input
 
@@ -22,21 +23,32 @@ def isWatchLink(link):
 #Given an HTML Youtube Result page, return first X results parsed into a String Array
 def parseDownloadLink(page):
     soup = BeautifulSoup(page, 'html.parser')
-    array = set()
+    aset = set()
     for link in soup.find_all('a'):
         linkhref = link.get('href')
         if isWatchLink(linkhref):
             prefix = "https://www.youtube.com/results?search_query="
             youtubeLink = prefix + linkhref
-            array.add(youtubeLink)
-    for link in array:
+            aset.add(youtubeLink)
+    for link in aset:
         print(link)
-    return array
+    return aset
 
 #Given a Youtube link, download the result
-
+def download(link):
+    ydl_opts = {'format': 'bestaudio/best',
+                'postprocessors': [{
+                'key': 'FFmpegExtractAudio',
+                'preferredcodec': 'mp3'}]}
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        ydl.download([link])
+    return True
 
 #Give a list of youtube links, download all of the results
+def downloadList(list):
+    for link in list:
+        download(link)
+    return True
 
 # Here's our "unit tests".
 class functionTests(unittest.TestCase):
@@ -60,6 +72,17 @@ class functionTests(unittest.TestCase):
         self.assertTrue(isWatchLink(success))
         failure = "ABCDE"
         self.assertFalse(isWatchLink(failure))
+
+    def testDownload(self):
+        link = "https://www.youtube.com/watch?v=FZvtATBfSpM"
+        self.assertTrue(download(link))
+
+    def testDownloadList(self):
+        aset = set()
+        aset.add("https://www.youtube.com/watch?v=uw7R_RGAd9I")
+        aset.add("https://www.youtube.com/watch?v=q-H62GgHjeg")
+        aset.add("https://www.youtube.com/watch?v=V7vjxhqMPng")
+        self.assertTrue(downloadList(aset))
 
 def main():
     unittest.main()

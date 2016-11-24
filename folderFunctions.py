@@ -1,4 +1,5 @@
 import os
+import unittest
 
 def makemydir(whatever):
   try:
@@ -15,3 +16,15 @@ def get_parent_dir(directory):
 def goUpOneDirectory():
     current_dirs_parent = get_parent_dir(os.getcwd())
     os.chdir(current_dirs_parent)
+
+# Here's our "unit tests".
+class functionTests(unittest.TestCase):
+
+    def testGetParentDir(self):
+        print(get_parent_dir(os.getcwd()))
+
+def main():
+    unittest.main()
+
+if __name__ == '__main__':
+    main()

@@ -5,15 +5,19 @@ import youtube_dl
 
 #Enter a Search Input
 
-def scanInput():
-    #person = raw_input('Enter Your Search Input: ')
-    #print("Hello", person)
-    return True
+def scanSearchInput():
+    person = input('Enter Your Search Input: ')
+    return person
+
+def scanNumOfResult():
+    result = int(input('Please enter number of results in digits: '))
+    return result
 
 #Query youtube with search input and return result as HTML String
 def queryYoutube(input):
     prefix = "https://www.youtube.com/results?search_query="
-    url = prefix + input
+    postfix = "&sp=EgIYAQ%253D%253D"
+    url = prefix + input + postfix
     page = requests.get(url)
     return page.content
 
@@ -27,7 +31,7 @@ def parseDownloadLink(page):
     for link in soup.find_all('a'):
         linkhref = link.get('href')
         if isWatchLink(linkhref):
-            prefix = "https://www.youtube.com/results?search_query="
+            prefix = "https://www.youtube.com"
             youtubeLink = prefix + linkhref
             aset.add(youtubeLink)
     for link in aset:
@@ -45,10 +49,24 @@ def download(link):
     return True
 
 #Give a list of youtube links, download all of the results
-def downloadList(list):
+def downloadList(list, n):
+    count = 0
     for link in list:
         download(link)
+        count = count + 1
+        if count > n:
+            break
     return True
+
+def printResult(result):
+    if result == True:
+        print("Files has been downloaded successfully")
+    else:
+        print("Files has failed")
+
+def fixInput(input):
+    output = input.replace(' ', '+')
+    return output
 
 # Here's our "unit tests".
 class functionTests(unittest.TestCase):
@@ -83,6 +101,12 @@ class functionTests(unittest.TestCase):
         aset.add("https://www.youtube.com/watch?v=q-H62GgHjeg")
         aset.add("https://www.youtube.com/watch?v=V7vjxhqMPng")
         self.assertTrue(downloadList(aset))
+
+    def testFixInput(self):
+        name = "Cosmic Gate"
+        result = "Cosmic+Gate"
+        actural = fixInput(name)
+        self.assertEqual(actural, result)
 
 def main():
     unittest.main()

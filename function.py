@@ -17,7 +17,8 @@ def scanNumOfResult():
 def queryYoutube(input):
     prefix = "https://www.youtube.com/results?search_query="
     postfix = "&sp=EgIYAQ%253D%253D"
-    url = prefix + input + postfix
+    fixedInput = fixInput(input)
+    url = prefix + fixedInput + postfix
     page = requests.get(url)
     return page.content
 

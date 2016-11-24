@@ -6,7 +6,7 @@ import youtube_dl
 #Enter a Search Input
 
 def scanSearchInput():
-    person = input('Enter Your Search Input: ')
+    person = input('Enter Your Search Input: or press X to quit')
     return person
 
 def scanNumOfResult():

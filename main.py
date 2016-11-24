@@ -1,10 +1,22 @@
 import function
 
+def makemydir(whatever):
+  try:
+    os.makedirs(whatever)
+  except OSError:
+    pass
+  # let exception propagate if we just can't
+  # cd into the specified directory
+  os.chdir(whatever)
+
 def main():
 
     #1)Scan In User Input
     searchInput = function.scanSearchInput()
     numOfResult = function.scanNumOfResult()
+
+    #1.1)Make Directory
+    makemydir(searchInput)
 
     #2)Go to youtube and search with input
     page = function.queryYoutube(searchInput)

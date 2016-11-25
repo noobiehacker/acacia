@@ -13,10 +13,6 @@ def makemydir(whatever):
 def get_parent_dir(directory):
     return os.path.abspath(directory)
 
-def goUpOneDirectory():
-    current_dirs_parent = get_parent_dir(os.getcwd())
-    os.chdir(current_dirs_parent)
-
 # Here's our "unit tests".
 class functionTests(unittest.TestCase):
 

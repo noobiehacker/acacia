@@ -1,17 +1,18 @@
-import networkFunctions
+import searchNetworkFunctions
 import folderFunctions
 import userSearchInput
 import IOFunctions
-
 import os
+import downloadFunction
+
 def scanInInput():
 
     result = []
     while True:
-        searchInput = networkFunctions.scanSearchInput()
-        if networkFunctions.userWantsToExit(searchInput):
+        searchInput = IOFunctions.scanSearchInput()
+        if IOFunctions.userWantsToExit(searchInput):
             break
-        numOfResult = networkFunctions.scanNumOfResult()
+        numOfResult = IOFunctions.scanNumOfResult()
         input = userSearchInput.UserSearchInput(searchInput,numOfResult)
         result.append(input)
     return result
@@ -27,19 +28,20 @@ def executeSearchMode():
         folderFunctions.makemydir(item.searchInput)
 
         # 2)Go to youtube and search with input
-        page = networkFunctions.queryYoutube(item.searchInput)
+        page = searchNetworkFunctions.queryYoutube(item.searchInput)
 
         # 3)Parse result into a list of array
-        list = networkFunctions.parseDownloadLinkFromYT(page)
+        list = searchNetworkFunctions.parseDownloadLinkFromYT(page)
 
         # 4)Download all files in array one by one
-        downloadResult = networkFunctions.downloadList(list, item.numOfResult)
+        downloadResult = downloadFunction.downloadList(list, item.numOfResult)
 
-        networkFunctions.printResult(downloadResult)
+        searchNetworkFunctions.printResult(downloadResult)
 
         os.chdir(baseDirectory)
 
 def executePageMode():
+    print("Implement ME")
 
 def main():
 

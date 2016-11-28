@@ -5,7 +5,7 @@ import IOFunctions
 import os
 import downloadFunction
 
-def scanInInput():
+def scanInInputForSearchMode():
 
     result = []
     while True:
@@ -20,7 +20,7 @@ def scanInInput():
 def executeSearchMode():
 
     # 1.0)Scan In User Input
-    array = scanInInput()
+    array = scanInInputForSearchMode()
     baseDirectory = os.getcwd()
 
     for item in array:

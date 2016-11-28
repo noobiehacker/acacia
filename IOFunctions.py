@@ -6,12 +6,13 @@ def isPageMode():
 
 #Enter a Search Input
 def scanSearchInput():
-    person = input('Enter Your Search Input: or press X to quit: ')
-    return person
+    return input('Enter Your Search Input: or press X to quit: ')
+
+def scanPageInput():
+    return input('Please enter the url you want to parse: ')
 
 def scanNumOfResult():
-    result = int(input('Please enter number of results in digits: '))
-    return result
+    return int(input('Please enter number of results in digits: '))
 
 def userWantsToExit(input):
     return (input == "X")

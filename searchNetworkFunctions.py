@@ -1,7 +1,6 @@
 import unittest
 import requests
 import downloadFunction
-
 from bs4 import BeautifulSoup
 
 #Query youtube with search input and return result as HTML String

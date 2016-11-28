@@ -1,14 +1,15 @@
 import unittest
+import requests
 import downloadFunction
 from bs4 import BeautifulSoup
 from selenium import webdriver
 
 def downloadAllLinksFromWB(url):
     #1 Open The Link With Selenium Browser
-    driver = openLinkWithSelenium(url)
+    page = requests.get(url)
 
     #2 Find all the iframes 's src
-    frameEmdSrcs = findAllFramesEmdSrc(driver.page_source.encode('utf-8'))
+    frameEmdSrcs = findAllFramesEmdSrc(page.content)
 
     #3 Transform into dlable link and download
     downloadAllLinkFromSrcs(frameEmdSrcs)

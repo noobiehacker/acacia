@@ -17,6 +17,9 @@ def scanNumOfResult():
 def userWantsToExit(input):
     return (input == "X")
 
+def scanInFolderName():
+    return input('Please enter folder name of your choice: ')
+
 # Here's our "unit tests".
 class functionTests(unittest.TestCase):
 

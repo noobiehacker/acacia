@@ -4,6 +4,7 @@ import userSearchInput
 import IOFunctions
 import os
 import downloadFunction
+import pageNetworkFunction
 
 def scanInInputForSearchMode():
 
@@ -41,7 +42,19 @@ def executeSearchMode():
         os.chdir(baseDirectory)
 
 def executePageMode():
-    print("Implement ME")
+
+    #1 Scan In Url
+    url = IOFunctions.scanPageInput()
+    #2 Scan in folder name
+    folderName = IOFunctions.scanInFolderName()
+    #3 Scan in base directory name
+    baseDirectory = os.getcwd()
+    #4 Create a directory
+    folderFunctions.makemydir(folderName)
+    #5 Download all files
+    pageNetworkFunction.downloadAllLinksFromWB(url)
+    #6 Move back up one directory
+    os.chdir(baseDirectory)
 
 def main():
 

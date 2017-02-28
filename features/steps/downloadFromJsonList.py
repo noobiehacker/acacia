@@ -3,22 +3,19 @@ import json
 from pprint import pprint
 from behave import given, when, then, step
 
-@given('Function is called')
+@given('A collection of youtubeLink is loaded into memory')
 def step_impl(context):
     pass
 
-@when('Json is loaded{number:d}')
+@when('Youtube DL Library is called{number:d}')
 def step_impl(context, number):  # -- NOTE: number is converted into integer
     with open('testData.json') as data_file:
         data = json.load(data_file)
-    #1 Create a for loop that does two tasks
-    #1a Read a Link from the Json
-    #1b Pass link to youtubedl library to download file
     assert number >= 1 or number == 0
     context.tests_count = number
     assert data["key"] == "value"
 
-@then('It will be parsed and loaded in memory')
+@then('Then It will download the link\'s file onto disk')
 def step_impl(context):
     assert context.failed is False
     assert context.tests_count >= 0

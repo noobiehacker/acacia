@@ -1,5 +1,6 @@
 import logging
 import json
+import downloadFunction
 from pprint import pprint
 from behave import given, when, then, step
 
@@ -13,7 +14,11 @@ def step_impl(context, number):  # -- NOTE: number is converted into integer
         data = json.load(data_file)
     #1 Create a for loop that does two tasks
     #1a Read a Link from the Json
+    link = data["key"]
     #1b Pass link to youtubedl library to download file
+    youtubelist = []
+    downloadResult = downloadFunction.downloadList(youtubelist)
+    searchNetworkFunctions.printResult(downloadResult)
     assert number >= 1 or number == 0
     context.tests_count = number
     assert data["key"] == "value"

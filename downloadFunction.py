@@ -19,3 +19,9 @@ def downloadList(list, n):
         if count > n:
             break
     return True
+
+#Give a list of youtube links, download all of the results
+def downloadList(youtubeList):
+    for link in youtubeList:
+        download(link)
+    return True

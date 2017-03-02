@@ -25,3 +25,12 @@ def downloadList(youtubeList):
     for link in youtubeList:
         download(link)
     return True
+
+def download(link, name):
+    ydl_opts = {'format': 'bestaudio/best',
+                'postprocessors': [{
+                'key': 'FFmpegExtractAudio',
+                'preferredcodec': 'mp3'}]}
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+            ydl.download([link])
+    return True

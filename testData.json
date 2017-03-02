@@ -1,6 +1,10 @@
 {
-
-  "key" : "value",
-  "asd" : "value2"
-
+  "links":[
+    {
+      "key" : "value"
+    },
+    {
+      "key" : "value2"
+    }
+  ]
 }

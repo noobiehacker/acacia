@@ -13,9 +13,6 @@ def step_impl(context, number):  # -- NOTE: number is converted into integer
         data = json.load(data_file)
     assert number >= 1 or number == 0
     context.tests_count = number
-#    print("\n")
-#    print(data["key"])
-#    print("\n")
 
 @then('Then It will download the link\'s file onto disk')
 def step_impl(context):

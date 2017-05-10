@@ -26,7 +26,7 @@ def downloadList(youtubeList):
         download(link)
     return True
 
-def download(link, name):
+def downloadTwo(link, name):
     ydl_opts = {'format': 'bestaudio/best',
                 'postprocessors': [{
                 'key': 'FFmpegExtractAudio',
